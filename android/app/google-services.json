@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "997520643312",
+    "project_id": "softonix-meals-app",
+    "storage_bucket": "softonix-meals-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997520643312:android:b921777f51cc80c55d1e35",
+        "android_client_info": {
+          "package_name": "com.softonix.flutter_meals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997520643312-boqvfdedq88tuqkb83rak1glh942hdl0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.softonix.flutter_meals",
+            "certificate_hash": "051641348f532618e52dde116a31d57c90afdb23"
+          }
+        },
+        {
+          "client_id": "997520643312-45hm5q5bu2f44h7vusfcsrci68abp20j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYfSGBZmr1Zo9dFlQU6VXjNvv9kOPIqKc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997520643312-45hm5q5bu2f44h7vusfcsrci68abp20j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
