@@ -23,7 +23,7 @@ class CategoriesScreen extends StatelessWidget {
             return CategoryItem(
                 title: category.title,
                 bgcolor: category.color,
-                id: 'c${1 + index}');
+                id: category.id);
           },
           padding: const EdgeInsets.all(20),
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(

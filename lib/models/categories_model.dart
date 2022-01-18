@@ -19,7 +19,7 @@ class Category {
     return Category(
       color: _parseColor(snapshot['color']),
       title: snapshot['title'],
-      id: 'c1',
+      id: snapshot['id'],
     );
   }
 }

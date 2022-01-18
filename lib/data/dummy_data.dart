@@ -123,6 +123,7 @@ const dummyMeals = [
     categories: [
       'c2',
       'c3',
+      'c11',
     ],
     title: 'Classic Hamburger',
     affordability: Affordability.pricey,
@@ -261,6 +262,7 @@ const dummyMeals = [
     id: 'm7',
     categories: [
       'c7',
+      'c11',
     ],
     title: 'Pancakes',
     affordability: Affordability.affordable,
