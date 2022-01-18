@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_meals/data/dummy_data.dart';
+import 'package:flutter_meals/screen/tabs_screen.dart';
 import 'package:flutter_meals/widget/google_sign_widget.dart';
-import 'package:flutter_meals/widget/logged_in_widget.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class WrapperScreen extends StatelessWidget {
+  const WrapperScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class HomeScreen extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasData) {
-              return LoggedInWidget();
+              return TabsScreen(favoriteMeals);
             } else if (snapshot.hasError) {
               return const Center(child: Text('Something Went Wrong!Whoops'));
             } else {

@@ -37,6 +37,12 @@ class GoogleSignUpWidget extends StatelessWidget {
             ),
           ),
           const Spacer(),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/signup');
+            },
+            child: const Text('Sign in via Email'),
+          ),
           ElevatedButton.icon(
             onPressed: () {
               final provider = Provider.of<GoogleSignInProvider>(
