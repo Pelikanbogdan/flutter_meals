@@ -1,14 +1,8 @@
-enum Complexity {
-  simple,
-  medium,
-  hard,
-}
-enum Affordability {
-  affordable,
-  pricey,
-  luxurious,
-}
+import 'package:json_annotation/json_annotation.dart';
 
+part 'meal.g.dart';
+
+@JsonSerializable()
 class Meal {
   final String id;
   final List<String> categories;
@@ -24,6 +18,10 @@ class Meal {
   final bool isVegan;
   final bool isVegetarian;
 
+  factory Meal.fromJson(Map<String, dynamic> json) => _$MealFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MealToJson(this);
+
   const Meal(
       {required this.id,
       required this.categories,
@@ -38,4 +36,16 @@ class Meal {
       required this.isLactoseFree,
       required this.isVegan,
       required this.isVegetarian});
+}
+
+enum Complexity {
+  simple,
+  medium,
+  hard,
+}
+
+enum Affordability {
+  affordable,
+  pricey,
+  luxurious,
 }

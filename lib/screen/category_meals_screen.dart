@@ -1,25 +1,31 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_meals/models/meal_model.dart';
+import 'package:flutter_meals/data/dummy_data.dart';
+import 'package:flutter_meals/models/meal.dart';
 import 'package:flutter_meals/widget/meal_item.dart';
+import 'package:flutter_meals/helper/firebase_helper.dart';
 
 class CategoryMealsScreen extends StatefulWidget {
   static const routeName = '/category-meals';
 
   final List<Meal> availableMeals;
-  const CategoryMealsScreen(this.availableMeals, {Key? key}) : super(key: key);
+  CategoryMealsScreen(this.availableMeals, {Key? key}) : super(key: key);
 
   @override
   _CategoryMealsScreenState createState() => _CategoryMealsScreenState();
 }
 
 class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
+  final firebaseHelper = FirebaseHelper();
   late String categoryTitle;
   late List<Meal> displayedMeals;
+  Map<String, dynamic> toFirebase = {};
   var _loadedInitData = false;
+  CollectionReference meals = FirebaseFirestore.instance.collection('meals');
 
   @override
   void initState() {
-    // ...
+    //firebaseHelper.fillCollection();
     super.initState();
   }
 

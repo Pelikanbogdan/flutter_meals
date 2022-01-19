@@ -5,7 +5,7 @@ import 'package:flutter_meals/screen/favorites_screen.dart';
 import 'package:flutter_meals/screen/logged_in_screen.dart';
 import 'package:provider/provider.dart';
 import '../main_drawer.dart';
-import '../models/meal_model.dart';
+import '../models/meal.dart';
 import './categories_screen.dart';
 
 class TabsScreen extends StatefulWidget {
