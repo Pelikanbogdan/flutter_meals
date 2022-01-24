@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'meal.g.dart';
@@ -19,6 +20,29 @@ class Meal {
   final bool isVegetarian;
 
   factory Meal.fromJson(Map<String, dynamic> json) => _$MealFromJson(json);
+
+  factory Meal.fromSnapshot(DocumentSnapshot snapshot) => Meal(
+        id: snapshot['id'] as String,
+        categories: (snapshot['categories'] as List<dynamic>)
+            .map((e) => e as String)
+            .toList(),
+        title: snapshot['title'] as String,
+        imageUrl: snapshot['imageUrl'] as String,
+        ingredients: (snapshot['ingredients'] as List<dynamic>)
+            .map((e) => e as String)
+            .toList(),
+        steps: (snapshot['steps'] as List<dynamic>)
+            .map((e) => e as String)
+            .toList(),
+        duration: snapshot['duration'] as int,
+        complexity: $enumDecode(_$ComplexityEnumMap, snapshot['complexity']),
+        affordability:
+            $enumDecode(_$AffordabilityEnumMap, snapshot['affordability']),
+        isGlutenFree: snapshot['isGlutenFree'] as bool,
+        isLactoseFree: snapshot['isLactoseFree'] as bool,
+        isVegan: snapshot['isVegan'] as bool,
+        isVegetarian: snapshot['isVegetarian'] as bool,
+      );
 
   Map<String, dynamic> toJson() => _$MealToJson(this);
 

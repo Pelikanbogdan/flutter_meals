@@ -1,33 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_meals/widget/meal_item.dart';
-
+import 'package:flutter_meals/service/preferences_service.dart';
 import '../models/meal.dart';
 
-class FavoritesScreen extends StatelessWidget {
-  final List<Meal> favoriteMeals;
+class FavoritesScreen extends StatefulWidget {
+  static List<Meal> favoriteMeals = [];
 
-  const FavoritesScreen(this.favoriteMeals, {Key? key}) : super(key: key);
+  const FavoritesScreen({Key? key}) : super(key: key);
+
+  @override
+  State<FavoritesScreen> createState() => _FavoritesScreenState();
+}
+
+class _FavoritesScreenState extends State<FavoritesScreen> {
+  final _preferencesService = PreferencesService();
+  List<String> listOfIds = [];
+  void loadId() async {
+    final id = await _preferencesService.getMealIds();
+    setState(() {
+      listOfIds = id!;
+    });
+  }
+
+  @override
+  void initState() {
+    loadId();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (favoriteMeals.isEmpty) {
-      return const Center(
-        child: Text('You have no favorites yet - start adding some!'),
-      );
-    } else {
-      return ListView.builder(
-        itemBuilder: (ctx, index) {
-          return MealItem(
-            id: favoriteMeals[index].id,
-            title: favoriteMeals[index].title,
-            imageUrl: favoriteMeals[index].imageUrl,
-            duration: favoriteMeals[index].duration,
-            affordability: favoriteMeals[index].affordability,
-            complexity: favoriteMeals[index].complexity,
-          );
-        },
-        itemCount: favoriteMeals.length,
-      );
-    }
+    return FutureBuilder(
+      future: _preferencesService.getMealIds(),
+      builder: (context, snapshot) {
+        return Center(
+          child: Text('first element: ' +
+              listOfIds.first +
+              ' ' +
+              'elements count:' +
+              listOfIds.length.toString()),
+        );
+      },
+    );
   }
 }

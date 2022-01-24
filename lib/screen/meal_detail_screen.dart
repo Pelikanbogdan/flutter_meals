@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_meals/data/dummy_data.dart';
+import 'package:flutter_meals/models/meal.dart';
+import 'package:flutter_meals/service/preferences_service.dart';
 
 class MealDetailScreen extends StatelessWidget {
+  final _preferencesService = PreferencesService();
   static const routeName = '/meal-detail';
 
-  const MealDetailScreen({Key? key}) : super(key: key);
+  MealDetailScreen({Key? key}) : super(key: key);
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
@@ -33,8 +35,7 @@ class MealDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mealId = ModalRoute.of(context)?.settings.arguments as String;
-    final selectedMeal = dummyMeals.firstWhere((meal) => meal.id == mealId);
+    final selectedMeal = ModalRoute.of(context)?.settings.arguments as Meal;
     return Scaffold(
       appBar: AppBar(
         title: Text(selectedMeal.title),
@@ -91,7 +92,9 @@ class MealDetailScreen extends StatelessWidget {
         child: const Icon(
           Icons.star,
         ),
-        onPressed: () {},
+        onPressed: () {
+          _preferencesService.addMealId(selectedMeal.id);
+        },
       ),
     );
   }

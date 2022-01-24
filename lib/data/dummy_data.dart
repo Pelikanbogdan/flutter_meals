@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/categories_model.dart';
+import '../models/category.dart';
 import '../models/meal.dart';
 
 List<Category> dummyCategories = [

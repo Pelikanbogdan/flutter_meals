@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_meals/models/categories_model.dart';
+import 'package:flutter_meals/models/category.dart';
 import 'package:flutter_meals/widget/category_item.dart';
 
 class CategoriesScreen extends StatelessWidget {

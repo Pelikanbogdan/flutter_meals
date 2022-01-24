@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_meals/models/meal.dart';
 import 'package:flutter_meals/screen/meal_detail_screen.dart';
 
@@ -9,16 +10,18 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Meal meal;
 
-  const MealItem({
-    required this.id,
-    required this.title,
-    required this.imageUrl,
-    required this.duration,
-    required this.complexity,
-    required this.affordability,
-    Key? key,
-  }) : super(key: key);
+  const MealItem(
+      {Key? key,
+      required this.id,
+      required this.title,
+      required this.imageUrl,
+      required this.duration,
+      required this.complexity,
+      required this.affordability,
+      required this.meal})
+      : super(key: key);
 
   String get complexityText {
     switch (complexity) {
@@ -47,7 +50,7 @@ class MealItem extends StatelessWidget {
   }
 
   void selectMeal(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed(MealDetailScreen.routeName, arguments: id);
+    Navigator.of(ctx).pushNamed(MealDetailScreen.routeName, arguments: meal);
   }
 
   @override

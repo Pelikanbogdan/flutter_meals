@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_meals/data/dummy_data.dart';
 import 'package:flutter_meals/provider/google_sign_in_provider.dart';
 import 'package:flutter_meals/screen/categories_screen.dart';
 import 'package:flutter_meals/screen/category_meals_screen.dart';
@@ -12,6 +11,7 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
           SignUpScreen.routeName: (context) => const SignUpScreen(),
           CategoriesScreen.routeName: (context) => const CategoriesScreen(),
           CategoryMealsScreen.routeName: (context) =>
-              CategoryMealsScreen(dummyMeals),
-          MealDetailScreen.routeName: (context) => const MealDetailScreen(),
+              const CategoryMealsScreen(),
+          MealDetailScreen.routeName: (context) => MealDetailScreen(),
         },
       ),
     );
