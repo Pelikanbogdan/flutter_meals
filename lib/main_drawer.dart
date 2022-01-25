@@ -47,27 +47,9 @@ class _MainDrawerState extends State<MainDrawer> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      const Spacer(),
-                      CircleAvatar(
-                        radius: (20),
-                        backgroundImage: NetworkImage(user.photoURL!),
-                      ),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {
-                          final provider = Provider.of<GoogleSignInProvider>(
-                              context,
-                              listen: false);
-                          provider.googleLogout();
-                        },
-                        child: const Text(
-                          'Logout',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ],
+                  child: CircleAvatar(
+                    radius: (20),
+                    backgroundImage: NetworkImage(user.photoURL!),
                   ),
                 ),
                 Text(
@@ -87,6 +69,24 @@ class _MainDrawerState extends State<MainDrawer> {
             'Filters',
             Icons.settings,
           ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: TextButton(
+              onPressed: () {
+                final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.googleLogout();
+              },
+              child: const Text(
+                'Logout',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              ),
+            ),
+          )
         ],
       ),
     );
