@@ -60,6 +60,11 @@ class Meal {
       required this.isLactoseFree,
       required this.isVegan,
       required this.isVegetarian});
+
+  @override
+  String toString() {
+    return 'Meal(id: $id, categories: $categories, title: $title, imageUrl: $imageUrl, ingredients: $ingredients, steps: $steps, duration: $duration, complexity: $complexity, affordability: $affordability, isGlutenFree: $isGlutenFree, isLactoseFree: $isLactoseFree, isVegan: $isVegan, isVegetarian: $isVegetarian)';
+  }
 }
 
 enum Complexity {

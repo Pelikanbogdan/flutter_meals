@@ -46,16 +46,19 @@ class MealDetailScreen extends StatelessWidget {
             SizedBox(
               height: 300,
               width: double.infinity,
-              child: Image.network(
-                selectedMeal.imageUrl,
-                fit: BoxFit.cover,
+              child: Hero(
+                tag: 'Hero',
+                child: Image.network(
+                  selectedMeal.imageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             buildSectionTitle(context, 'Ingredients'),
             buildContainer(
               ListView.builder(
                 itemBuilder: (ctx, index) => Card(
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Colors.white,
                   child: Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: 5,

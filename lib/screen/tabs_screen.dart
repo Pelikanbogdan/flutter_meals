@@ -30,7 +30,7 @@ class _TabsScreenState extends State<TabsScreen> {
         'title': 'Categories',
       },
       {
-        'page': const FavoritesScreen(),
+        'page': FavoritesScreen(),
         'title': 'Your Favorite',
       },
       {

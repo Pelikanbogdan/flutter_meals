@@ -1,8 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_meals/provider/google_sign_in_provider.dart';
+import 'package:provider/provider.dart';
 
-class MainDrawer extends StatelessWidget {
+class MainDrawer extends StatefulWidget {
   const MainDrawer({Key? key}) : super(key: key);
 
+  @override
+  State<MainDrawer> createState() => _MainDrawerState();
+}
+
+class _MainDrawerState extends State<MainDrawer> {
   Widget buildListTile(String title, IconData icon) {
     return ListTile(
       leading: Icon(
@@ -25,6 +33,7 @@ class MainDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -32,14 +41,39 @@ class MainDrawer extends StatelessWidget {
             height: 120,
             width: double.infinity,
             padding: const EdgeInsets.all(20),
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.bottomLeft,
             color: Theme.of(context).colorScheme.secondary,
-            child: Text(
-              'Cooking Up!',
-              style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 30,
-                  color: Theme.of(context).primaryColor),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      const Spacer(),
+                      CircleAvatar(
+                        radius: (20),
+                        backgroundImage: NetworkImage(user.photoURL!),
+                      ),
+                      const Spacer(),
+                      TextButton(
+                        onPressed: () {
+                          final provider = Provider.of<GoogleSignInProvider>(
+                              context,
+                              listen: false);
+                          provider.googleLogout();
+                        },
+                        child: const Text(
+                          'Logout',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Text(
+                  'Email:  ${user.email ?? 'Anonymous'}',
+                ),
+              ],
             ),
           ),
           const SizedBox(
