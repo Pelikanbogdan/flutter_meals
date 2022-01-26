@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_meals/provider/google_sign_in_provider.dart';
+import 'package:flutter_meals/provider/auth_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -45,7 +45,7 @@ class GoogleSignUpWidget extends StatelessWidget {
           ),
           ElevatedButton.icon(
             onPressed: () {
-              final provider = Provider.of<GoogleSignInProvider>(
+              final provider = Provider.of<AuthProvider>(
                 context,
                 listen: false,
               );

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_meals/provider/google_sign_in_provider.dart';
+import 'package:flutter_meals/provider/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 class MainDrawer extends StatefulWidget {
@@ -75,7 +75,7 @@ class _MainDrawerState extends State<MainDrawer> {
             child: TextButton(
               onPressed: () {
                 final provider =
-                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                    Provider.of<AuthProvider>(context, listen: false);
                 provider.googleLogout();
               },
               child: const Text(

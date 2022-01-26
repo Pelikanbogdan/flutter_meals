@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_meals/provider/google_sign_in_provider.dart';
+import 'package:flutter_meals/provider/auth_provider.dart';
 import 'package:flutter_meals/screen/favorites_screen.dart';
 import 'package:flutter_meals/screen/logged_in_screen.dart';
 import 'package:provider/provider.dart';
@@ -49,53 +49,55 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _selectedPageIndex == 2
-          ? AppBar(
-              title: Text(_pages[_selectedPageIndex]['title'] as String),
-              centerTitle: true,
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    final provider = Provider.of<GoogleSignInProvider>(context,
-                        listen: false);
-                    provider.googleLogout();
-                  },
-                  child: const Text(
-                    'Logout',
-                    style: TextStyle(color: Colors.white),
+    return SafeArea(
+      child: Scaffold(
+        appBar: _selectedPageIndex == 2
+            ? AppBar(
+                title: Text(_pages[_selectedPageIndex]['title'] as String),
+                centerTitle: true,
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      final provider =
+                          Provider.of<AuthProvider>(context, listen: false);
+                      provider.googleLogout();
+                    },
+                    child: const Text(
+                      'Logout',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                ),
-              ],
-            )
-          : AppBar(
-              title: Text(_pages[_selectedPageIndex]['title'] as String),
+                ],
+              )
+            : AppBar(
+                title: Text(_pages[_selectedPageIndex]['title'] as String),
+              ),
+        drawer: const MainDrawer(),
+        body: _pages[_selectedPageIndex]['page'] as Widget,
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: _selectPage,
+          backgroundColor: Theme.of(context).primaryColor,
+          unselectedItemColor: Colors.grey,
+          selectedItemColor: Colors.white,
+          currentIndex: _selectedPageIndex,
+          // type: BottomNavigationBarType.fixed,
+          items: [
+            BottomNavigationBarItem(
+              backgroundColor: Theme.of(context).primaryColor,
+              icon: const Icon(Icons.category),
+              label: 'Categories',
             ),
-      drawer: const MainDrawer(),
-      body: _pages[_selectedPageIndex]['page'] as Widget,
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: _selectPage,
-        backgroundColor: Theme.of(context).primaryColor,
-        unselectedItemColor: Colors.grey,
-        selectedItemColor: Colors.white,
-        currentIndex: _selectedPageIndex,
-        // type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: const Icon(Icons.category),
-            label: 'Categories',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: const Icon(Icons.star),
-            label: 'Favorites',
-          ),
-          BottomNavigationBarItem(
-              icon: const Icon(Icons.account_circle),
-              label: user.displayName,
-              backgroundColor: Theme.of(context).primaryColor),
-        ],
+            BottomNavigationBarItem(
+              backgroundColor: Theme.of(context).primaryColor,
+              icon: const Icon(Icons.star),
+              label: 'Favorites',
+            ),
+            BottomNavigationBarItem(
+                icon: const Icon(Icons.account_circle),
+                label: user.displayName,
+                backgroundColor: Theme.of(context).primaryColor),
+          ],
+        ),
       ),
     );
   }

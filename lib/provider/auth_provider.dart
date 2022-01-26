@@ -2,10 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class GoogleSignInProvider extends ChangeNotifier {
+class AuthProvider extends ChangeNotifier {
+  final _auth = FirebaseAuth.instance;
   final googleSignIn = GoogleSignIn();
   GoogleSignInAccount? _user;
   GoogleSignInAccount get user => _user!;
+
+  Future signUp(String email, String password) async {
+    await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+  }
+
+  Future signIn(String email, String password) async {
+    await _auth.signInWithEmailAndPassword(email: email, password: password);
+  }
 
   Future googleLogin() async {
     try {
