@@ -15,6 +15,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future signIn(String email, String password) async {
     await _auth.signInWithEmailAndPassword(email: email, password: password);
+    notifyListeners();
   }
 
   Future googleLogin() async {
@@ -39,7 +40,12 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future googleLogout() async {
-    await googleSignIn.disconnect();
-    FirebaseAuth.instance.signOut();
+    try {
+      await googleSignIn.disconnect();
+      FirebaseAuth.instance.signOut();
+    } catch (e) {
+      FirebaseAuth.instance.signOut();
+    }
+    notifyListeners();
   }
 }

@@ -9,9 +9,9 @@ import '../models/meal.dart';
 import './categories_screen.dart';
 
 class TabsScreen extends StatefulWidget {
-  final List<Meal> favoriteMeals;
+  static const String routeName = '/tabs';
 
-  const TabsScreen(this.favoriteMeals, {Key? key}) : super(key: key);
+  const TabsScreen({Key? key}) : super(key: key);
 
   @override
   _TabsScreenState createState() => _TabsScreenState();
@@ -33,10 +33,6 @@ class _TabsScreenState extends State<TabsScreen> {
         'page': FavoritesScreen(),
         'title': 'Your Favorite',
       },
-      {
-        'page': LoggedInScreen(),
-        'title': user.displayName!,
-      }
     ];
     super.initState();
   }
@@ -51,27 +47,9 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: _selectedPageIndex == 2
-            ? AppBar(
-                title: Text(_pages[_selectedPageIndex]['title'] as String),
-                centerTitle: true,
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      final provider =
-                          Provider.of<AuthProvider>(context, listen: false);
-                      provider.googleLogout();
-                    },
-                    child: const Text(
-                      'Logout',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              )
-            : AppBar(
-                title: Text(_pages[_selectedPageIndex]['title'] as String),
-              ),
+        appBar: AppBar(
+          title: Text(_pages[_selectedPageIndex]['title'] as String),
+        ),
         drawer: const MainDrawer(),
         body: _pages[_selectedPageIndex]['page'] as Widget,
         bottomNavigationBar: BottomNavigationBar(
@@ -92,10 +70,6 @@ class _TabsScreenState extends State<TabsScreen> {
               icon: const Icon(Icons.star),
               label: 'Favorites',
             ),
-            BottomNavigationBarItem(
-                icon: const Icon(Icons.account_circle),
-                label: user.displayName,
-                backgroundColor: Theme.of(context).primaryColor),
           ],
         ),
       ),

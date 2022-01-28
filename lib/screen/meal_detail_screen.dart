@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meals/models/meal.dart';
 import 'package:flutter_meals/service/preferences_service.dart';
 
-class MealDetailScreen extends StatelessWidget {
-  final _preferencesService = PreferencesService();
+class MealDetailScreen extends StatefulWidget {
   static const routeName = '/meal-detail';
 
-  MealDetailScreen({Key? key}) : super(key: key);
+  const MealDetailScreen({Key? key}) : super(key: key);
 
+  @override
+  State<MealDetailScreen> createState() => _MealDetailScreenState();
+}
+
+class _MealDetailScreenState extends State<MealDetailScreen> {
+  final _preferencesService = PreferencesService();
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
@@ -92,9 +97,7 @@ class MealDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.star,
-        ),
+        child: const Icon(Icons.star),
         onPressed: () {
           _preferencesService.addMealId(selectedMeal.id);
         },

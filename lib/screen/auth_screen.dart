@@ -45,7 +45,7 @@ class AuthScreen extends StatelessWidget {
                         ..translate(-10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.deepOrange.shade900,
+                        color: Colors.blue[700],
                         boxShadow: const [
                           BoxShadow(
                             blurRadius: 8,
@@ -54,14 +54,9 @@ class AuthScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                      child: const Text(
-                        'MyShop',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 50,
-                          fontFamily: 'Anton',
-                          fontWeight: FontWeight.normal,
-                        ),
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        scale: 1.9,
                       ),
                     ),
                   ),

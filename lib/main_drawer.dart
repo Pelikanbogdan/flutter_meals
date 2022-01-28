@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meals/provider/auth_provider.dart';
+import 'package:flutter_meals/screen/auth_screen.dart';
+import 'package:flutter_meals/service/preferences_service.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -11,6 +14,37 @@ class MainDrawer extends StatefulWidget {
 }
 
 class _MainDrawerState extends State<MainDrawer> {
+  void _showDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('YES'),
+            onPressed: () {
+              final preference = PreferencesService();
+              preference.deleteAllMeal();
+              final provider =
+                  Provider.of<AuthProvider>(context, listen: false);
+              provider.googleLogout();
+              Navigator.of(ctx).popAndPushNamed(AuthScreen.routeName);
+            },
+          ),
+          TextButton(
+            child: const Text('NO'),
+            onPressed: () {
+              final provider =
+                  Provider.of<AuthProvider>(context, listen: false);
+              provider.googleLogout();
+              Navigator.of(ctx).popAndPushNamed(AuthScreen.routeName);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget buildListTile(String title, IconData icon) {
     return ListTile(
       leading: Icon(
@@ -25,15 +59,13 @@ class _MainDrawerState extends State<MainDrawer> {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onTap: () {
-        // ...
-      },
+      onTap: () {},
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
+    final user = FirebaseAuth.instance.currentUser;
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -43,19 +75,22 @@ class _MainDrawerState extends State<MainDrawer> {
             padding: const EdgeInsets.all(20),
             alignment: Alignment.bottomLeft,
             color: Theme.of(context).colorScheme.secondary,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CircleAvatar(
-                    radius: (20),
-                    backgroundImage: NetworkImage(user.photoURL!),
+            child: Center(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircleAvatar(
+                      radius: (20),
+                      backgroundImage: NetworkImage(user?.photoURL ??
+                          'https://www.pikpng.com/pngl/m/404-4040531_computer-icons-user-avatar-icon-design-login-user.png'),
+                    ),
                   ),
-                ),
-                Text(
-                  'Email:  ${user.email ?? 'Anonymous'}',
-                ),
-              ],
+                  Text(
+                    user?.email ?? 'Anonymous',
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(
@@ -74,9 +109,7 @@ class _MainDrawerState extends State<MainDrawer> {
             padding: const EdgeInsets.all(20),
             child: TextButton(
               onPressed: () {
-                final provider =
-                    Provider.of<AuthProvider>(context, listen: false);
-                provider.googleLogout();
+                _showDialog('Whould you like to clear favorites?');
               },
               child: const Text(
                 'Logout',

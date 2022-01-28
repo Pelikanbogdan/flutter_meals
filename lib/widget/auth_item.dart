@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meals/provider/auth_provider.dart';
 import 'package:flutter_meals/screen/auth_screen.dart';
+import 'package:flutter_meals/screen/tabs_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class AuthItem extends StatefulWidget {
@@ -52,6 +54,7 @@ class _AuthItemState extends State<AuthItem> {
       if (_authMode == AuthMode.login) {
         await Provider.of<AuthProvider>(context, listen: false).signIn(
             _authData['email'] as String, _authData['password'] as String);
+        Navigator.pushNamed(context, TabsScreen.routeName);
       } else {
         await Provider.of<AuthProvider>(context, listen: false).signUp(
             _authData['email'] as String, _authData['password'] as String);

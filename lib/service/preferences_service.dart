@@ -8,9 +8,21 @@ class PreferencesService {
     await preferences.setStringList(_keyName, mealIList);
   }
 
+  Future<bool> isFavorite(String id) async {
+    final preferences = await SharedPreferences.getInstance();
+    final idList = preferences.getStringList(_keyName) ?? [];
+    if (idList.contains(id)) {
+      return true;
+    }
+    return false;
+  }
+
   Future addMealId(String id) async {
     final preferences = await SharedPreferences.getInstance();
     final idList = preferences.getStringList(_keyName) ?? [];
+    if (idList.contains(id)) {
+      return;
+    }
     idList.add(id);
     preferences.setStringList(_keyName, idList);
   }
@@ -19,5 +31,10 @@ class PreferencesService {
     final preferences = await SharedPreferences.getInstance();
     final idList = preferences.getStringList(_keyName);
     return idList;
+  }
+
+  void deleteAllMeal() async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.clear();
   }
 }

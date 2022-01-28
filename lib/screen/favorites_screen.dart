@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meals/service/preferences_service.dart';
+import 'package:flutter_meals/widget/meal_item.dart';
 import '../models/meal.dart';
 
 class FavoritesScreen extends StatelessWidget {
@@ -13,7 +14,10 @@ class FavoritesScreen extends StatelessWidget {
       future: _preferencesService.getMealIds(),
       builder: (context, data) {
         if (!data.hasData) {
-          return const CircularProgressIndicator();
+          return const Center(
+            child: Text(
+                'Seems like you have not added any favorites yet,\n Start adding some!'),
+          );
         }
         final listOfId = data.data as List<String>;
         return StreamBuilder<QuerySnapshot>(
@@ -35,9 +39,14 @@ class FavoritesScreen extends StatelessWidget {
             return ListView.builder(
               itemCount: filteredMeals.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(filteredMeals[index].title),
-                  subtitle: Image.network(filteredMeals[index].imageUrl),
+                return MealItem(
+                  meal: filteredMeals[index],
+                  affordability: filteredMeals[index].affordability,
+                  complexity: filteredMeals[index].complexity,
+                  duration: filteredMeals[index].duration,
+                  id: filteredMeals[index].id,
+                  imageUrl: filteredMeals[index].imageUrl,
+                  title: filteredMeals[index].title,
                 );
               },
               padding: const EdgeInsets.all(20),

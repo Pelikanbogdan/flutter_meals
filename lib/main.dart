@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_meals/provider/auth_provider.dart';
 import 'package:flutter_meals/screen/categories_screen.dart';
 import 'package:flutter_meals/screen/category_meals_screen.dart';
+import 'package:flutter_meals/screen/tabs_screen.dart';
 import 'package:flutter_meals/screen/wrapper_screen.dart';
 import 'package:flutter_meals/screen/meal_detail_screen.dart';
 import 'package:flutter_meals/screen/auth_screen.dart';
@@ -30,9 +31,9 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => const AuthScreen(),
-          // '/': (context) => const WrapperScreen(),
+          '/': (context) => const WrapperScreen(),
           AuthScreen.routeName: (context) => const AuthScreen(),
+          TabsScreen.routeName: (context) => const TabsScreen(),
           CategoriesScreen.routeName: (context) => const CategoriesScreen(),
           CategoryMealsScreen.routeName: (context) =>
               const CategoryMealsScreen(),
