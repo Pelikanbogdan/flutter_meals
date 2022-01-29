@@ -17,6 +17,24 @@ class PreferencesService {
     return false;
   }
 
+  Future<void> deleteMealId(String id) async {
+    final preferences = await SharedPreferences.getInstance();
+    final idList = preferences.getStringList(_keyName) ?? [];
+    if (idList.contains(id)) {
+      idList.remove(id);
+      preferences.setStringList(_keyName, idList);
+    }
+  }
+
+  Future<void> toggleFavorite(String id) async {
+    final isCurrentlyFavorite = await isFavorite(id);
+    if (isCurrentlyFavorite) {
+      await deleteMealId(id);
+    } else {
+      await addMealId(id);
+    }
+  }
+
   Future addMealId(String id) async {
     final preferences = await SharedPreferences.getInstance();
     final idList = preferences.getStringList(_keyName) ?? [];

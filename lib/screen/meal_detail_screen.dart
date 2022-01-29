@@ -96,12 +96,21 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.star),
-        onPressed: () {
-          _preferencesService.addMealId(selectedMeal.id);
-        },
-      ),
+      floatingActionButton: FutureBuilder<bool>(
+          future: _preferencesService.isFavorite(selectedMeal.id),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              bool isFavorite = snapshot.data ?? false;
+              return FloatingActionButton(
+                child: Icon(isFavorite ? Icons.star : Icons.star_outline),
+                onPressed: () async {
+                  await _preferencesService.toggleFavorite(selectedMeal.id);
+                  setState(() {});
+                },
+              );
+            }
+            return const CircularProgressIndicator();
+          }),
     );
   }
 }

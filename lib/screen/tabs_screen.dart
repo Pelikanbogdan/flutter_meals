@@ -1,11 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_meals/provider/auth_provider.dart';
 import 'package:flutter_meals/screen/favorites_screen.dart';
-import 'package:flutter_meals/screen/logged_in_screen.dart';
-import 'package:provider/provider.dart';
 import '../main_drawer.dart';
-import '../models/meal.dart';
 import './categories_screen.dart';
 
 class TabsScreen extends StatefulWidget {

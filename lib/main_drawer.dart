@@ -4,7 +4,6 @@ import 'package:flutter_meals/provider/auth_provider.dart';
 import 'package:flutter_meals/screen/auth_screen.dart';
 import 'package:flutter_meals/service/preferences_service.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({Key? key}) : super(key: key);

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meals/provider/auth_provider.dart';
 import 'package:flutter_meals/screen/auth_screen.dart';
 import 'package:flutter_meals/screen/tabs_screen.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class AuthItem extends StatefulWidget {

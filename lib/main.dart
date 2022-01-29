@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           CategoriesScreen.routeName: (context) => const CategoriesScreen(),
           CategoryMealsScreen.routeName: (context) =>
               const CategoryMealsScreen(),
-          MealDetailScreen.routeName: (context) => MealDetailScreen(),
+          MealDetailScreen.routeName: (context) => const MealDetailScreen(),
         },
       ),
     );
